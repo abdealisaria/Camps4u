@@ -1,0 +1,24 @@
+<%- include("../partials/header.ejs")  %>
+<header class="jumbotron">
+    <div class="container">
+        <h1>These are the best campsites ever</h1>
+        <p>Try one of them and enjoy a discount on your next trip !</p>
+        <a href="/campsites/new" class="btn btn-primary btn-lg">Add new camp site</a>
+    </div>
+</header>
+<div class="container">
+    <div class="row" style="display: flex; flex-wrap: wrap;">
+        <% campsites.forEach(data => { %>
+        <div class="col-lg-3 col-md-4 thumbnail text-center">
+            <img src="<%=data["image"]%>" alt="">
+            <h4>
+                <%=  data["name"]; %>
+            </h4>
+            <a href="/campsites/<%= data["id"]  %>" name="id" class="btn btn-primary">
+                More info
+            </a>
+        </div>
+        <% }); %>
+    </div>
+</div>
+<%- include("../partials/footer.ejs")  %>

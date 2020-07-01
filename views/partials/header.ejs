@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Make site responsive on mobile/tablet -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Camps4U</title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a class="navbar-brand" href="/">Camps4U</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="nav navbar-nav">
+                    <li class="<%= typeof page !== 'undefined' && page === 'campsites' ? 'active' : '' %>"><a
+                            href="/campsites">Home</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <% if(!currentuser){ %>
+                    <li class="<%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>"><a
+                            href="/login">Login</a></li>
+                    <li class="<%= typeof page !== 'undefined' && page === 'register' ? 'active' : '' %>"><a
+                            href="/register">Sign Up</a></li>
+                    <% } else { %>
+                    <li><a href="#">Signed in as, <%= currentuser.username.toUpperCase() %></a></li>
+                    <li><a href="/logout">Logout</a></li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <% if (error && error.length>0) { %>
+        <div class="alert alert-danger" role="alert">
+            <%= error %>
+        </div>
+        <% } else if(success && success.length>0){ %>
+        <div class="alert alert-success" role="alert">
+            <%= success %>
+        </div>
+        <% } %>
+        <div class="container">

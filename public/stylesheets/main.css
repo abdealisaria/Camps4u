@@ -1,0 +1,16 @@
+.thumbnail img {
+  padding: 0;
+  width: 100%;
+}
+.thumbnail {
+  padding: 0;
+}
+#deleteform {
+  display: inline;
+}
+#deletebutton {
+  display: inline;
+}
+#map {
+  padding: 0;
+}

@@ -1,0 +1,70 @@
+<%- include("../partials/header.ejs")  %>
+<div class="row">
+    <div class="col-md-3">
+        <p class="lead">Camps4U</p>
+        <div class="li-group">
+            <li class="list-group-item active">info</li>
+            <li class="list-group-item">contact</li>
+            <li class="list-group-item">address</li>
+            <!-- <li class="maps"> -->
+            <li id='map' class="list-group-item" style=' height: 250px; '></li>
+            <script>
+                var lng = <%=lng%>;
+                var lat = <%=lat%>;
+                mapboxgl.accessToken = 'pk.eyJ1Ijoic2FyaWFhYmRlYWxpIiwiYSI6ImNrOGxzbjVseTA4c2czbHMxeTVicnYzYWUifQ.tzeMt7BEuXox1-MXJyu0pw';
+                var map = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/mapbox/streets-v11',
+                    center: [lng, lat],
+                    zoom: 15
+                });
+            </script>
+            <!-- </div> -->
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="thumbnail">
+            <img class="image-responsive" src="<%= campdesc.image %>" alt="">
+            <div class="caption">
+                <h4 class="pull-right">$<%=campdesc.price%>/night</h4>
+                <h4><a><%= campdesc.name %></a></h4>
+                <p><%= campdesc.desc%></p>
+                <p><em>Submitted by </em><%=campdesc.author.username%>, <%= moment(campdesc.createdAt).fromNow() %> </p>
+                <% if (currentuser && campdesc.author.id.equals(currentuser._id)||currentuser &&currentuser.isadmin){ %>
+                <a class="btn btn-warning btn-sm" href="/campsites/<%= campdesc._id %>/edit">Edit camp</a>
+                <form id="deleteform" action="/campsites/<%=campdesc._id%>/delete?_method=DELETE" method="POST">
+                    <button class="btn btn-danger btn-sm">Delete camp</button>
+                </form>
+                <% } %>
+            </div>
+        </div>
+        <div class=" well">
+            <div class="text-right">
+                <a href="/campsites/<%=campdesc._id%>/comments/new" class="btn btn-sm btn-success">Add
+                    new
+                    review</a>
+            </div>
+            <hr>
+            <% campdesc.comments.forEach(function(data){ %>
+            <div class="row">
+                <div class="col-md-12">
+                    <strong><%= data.author.username%></strong><span
+                        class="pull-right"><%= moment(data.createdAt).fromNow() %></span>
+                    <p><%= data.text %> </p>
+                    <% if (currentuser && data.author.id.equals(currentuser._id) || currentuser&&currentuser.isadmin) { %>
+                    <a href="/campsites/<%=campdesc._id%>/comments/<%=data._id%>/edit"
+                        class="btn btn-xs btn-warning">Edit</a>
+                    <form id="deletebutton" action="/campsites/<%=campdesc._id%>/comments/<%=data._id%>/?_method=DELETE"
+                        method="post">
+                        <button class="btn btn-xs btn-danger">Delete</button>
+                    </form>
+                    <% } %>
+                    <% });%>
+                    <a href="/campsites" class="btn btn-sm btn-info pull-right">Go back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer.ejs")  %>

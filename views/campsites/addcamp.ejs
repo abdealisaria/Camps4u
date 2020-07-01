@@ -1,0 +1,31 @@
+<%- include("../partials/header.ejs") %>
+<div class="row">
+    <h1 style="text-align: center;">Add new Camp Site</h1>
+    <p style="text-align: center;">Tell us about a new Camp that is not displayed on our site</p>
+
+    <div style="width: 30%; margin: 30px auto;">
+        <form action="/campsites" method="POST">
+            <div class="form-group">
+                <input type="text" name="name" class="form-control" placeholder="campsite name">
+            </div>
+            <div class="form-group">
+                <input type="number" name="price" class="form-control" placeholder="price" min="0.01" step="0.01">
+            </div>
+            <div class="form-group">
+                <input type="url" name="image" class="form-control" placeholder="image url" id="">
+            </div>
+            <div class="form-group">
+                <input type="text" name="location" class="form-control" placeholder="location" id="">
+            </div>
+            <div class="form-group">
+                <input type="text" name="desc" class="form-control" placeholder="description">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-lg btn-primary btn-block">Submit</button>
+            </div>
+        </form>
+        <a class="btn btn-lg btn-warning btn-block" style="text-align: center;" href="/campsites">Go back to
+            campsites</a>
+    </div>
+</div>
+<%- include("../partials/footer.ejs") %>
