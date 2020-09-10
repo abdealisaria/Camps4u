@@ -62,5 +62,5 @@ app.use(campsiteroutes);
 
 // express listen for requests
 app.listen(port, function () {
-  console.log("The Camps4U server has started at " + port);
+  console.log("The Camps4U server has started at " + Number(port));
 });
