@@ -4,4 +4,5 @@ CRUD website with authentication, user/admin roles and comments/review system fo
 
 Steps to run (node is required):
 run "npm install" in the terminal.
+
 run "node app.js" in the terminal.
